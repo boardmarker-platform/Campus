@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import woowacourse.campus.R
+import woowacourse.campus.ui.common.AttendanceStatusBoard
 
 @Composable
 internal fun HomeScreen(
@@ -58,20 +59,6 @@ internal fun HomeScreen(
             ShortcutList()
             Spacer(modifier = Modifier.padding(32.dp))
         }
-    }
-}
-
-@Composable
-fun AttendanceStatusBoard() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .background(
-                color = Color.DarkGray,
-                shape = RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp),
-            ),
-    ) {
     }
 }
 
