@@ -21,9 +21,17 @@
     <string name="home_shortcut_zzimkkong">찜꽁</string>
     <string name="home_shortcut_prolog">프롤로그</string>
     <string name="home_shortcut_lms">LMS</string>
+    <string name="home_attendance_nickname">안녕하세요 %s</string>
+    <string name="home_attendance_status">%s 처리 되었습니다.</string>
+
+    <!-- attendance status -->
+    <string name="attendance_status_attendance">출석</string>
+    <string name="attendance_status_tardiness">지각</string>
+    <string name="attendance_status_absence">결석</string>
 
     <!-- login -->
     <string name="login_hint_password">비밀번호를 입력해주세요.</string>
     <string name="login_button_login">로그인하기</string>
     <string name="login_logo_image_description">로고 이미지</string>
+
 </resources>

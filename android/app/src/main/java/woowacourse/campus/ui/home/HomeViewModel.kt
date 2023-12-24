@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import woowacourse.campus.data.remote.api.GetAllAnnouncementApi
 import woowacourse.campus.data.remote.api.GetAnnouncementApi
 import woowacourse.campus.data.repository.AnnouncementRepository
+import woowacourse.campus.domain.model.AttendanceStatus
 import woowacourse.campus.domain.usecase.GetLatestAnnouncementsUseCase
 
 class HomeViewModel(
@@ -23,6 +24,7 @@ class HomeViewModel(
         viewModelScope.launch {
             _uiState.value = HomeUiState.Success(
                 latestAnnouncements = getLatestAnnouncementsUseCase(),
+                attendanceStatus = AttendanceStatus.ATTENDANCE, // use case 로직 추가
             )
         }
     }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,13 +15,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import woowacourse.campus.R
+import woowacourse.campus.domain.model.AttendanceStatus
 import woowacourse.campus.ui.common.AttendanceStatusBoard
 import woowacourse.campus.ui.theme.WoowaCampusTheme
 
@@ -47,11 +45,7 @@ internal fun HomeScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        AttendanceStatusBoard(
-            nickname = "안녕하세요 레아",
-            attendanceStatus = "등교 처리 되었습니다.",
-            attendanceDetail = "( 선릉캠퍼스 | 10:00:58 )",
-        )
+        AttendanceBoard(uiState)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -64,6 +58,40 @@ internal fun HomeScreen(
             ShortcutList()
             Spacer(modifier = Modifier.padding(32.dp))
         }
+    }
+}
+
+@Composable
+private fun AttendanceBoard(uiState: HomeUiState) {
+    val nickname = "레아"  // 닉네임을 어디서 입력받고 어디서 관리할 것인지
+    when (uiState) {
+        is HomeUiState.Success -> {
+            AttendanceStatusBoard(
+                nickname = stringResource(R.string.home_attendance_nickname, nickname),
+                attendanceStatus = stringResource(
+                    R.string.home_attendance_status,
+                    uiState.attendanceStatus.toKorean()
+                ),
+                // 캠퍼스 구분 및 출석 시간을 어떻게 가져올 것인지
+                attendanceDetail = "( 선릉캠퍼스 | 10:00:58 )",
+            )
+        }
+
+        is HomeUiState.Loading -> {
+            AttendanceStatusBoard(
+                nickname = stringResource(R.string.home_attendance_nickname, nickname),
+            )
+        }
+    }
+}
+
+// 어디서 이 작업을 해주면 좋을까
+@Composable
+private fun AttendanceStatus.toKorean(): String {
+    return when (this) {
+        AttendanceStatus.ATTENDANCE -> stringResource(R.string.attendance_status_attendance)
+        AttendanceStatus.TARDINESS -> stringResource(R.string.attendance_status_tardiness)
+        AttendanceStatus.ABSENCE -> stringResource(R.string.attendance_status_absence)
     }
 }
 
