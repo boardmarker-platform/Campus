@@ -31,6 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import woowacourse.campus.R
 import woowacourse.campus.ui.common.AttendanceStatusBoard
+import woowacourse.campus.ui.theme.WoowaCampusTheme
 
 @Composable
 internal fun HomeScreen(
@@ -46,7 +47,11 @@ internal fun HomeScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        AttendanceStatusBoard()
+        AttendanceStatusBoard(
+            nickname = "안녕하세요 레아",
+            attendanceStatus = "등교 처리 되었습니다.",
+            attendanceDetail = "( 선릉캠퍼스 | 10:00:58 )",
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -204,5 +209,7 @@ private fun HomeContentTitle(title: String) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen(onAnnouncementItemClick = {}, onAnnouncementBoardClick = {})
+    WoowaCampusTheme {
+        HomeScreen(onAnnouncementItemClick = {}, onAnnouncementBoardClick = {})
+    }
 }

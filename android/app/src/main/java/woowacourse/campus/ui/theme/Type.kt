@@ -37,4 +37,11 @@ val Typography = Typography(
         platformStyle = PlatformTextStyle(includeFontPadding = false),
         lineHeight = 20.sp,
     ),
+    headlineLarge = TextStyle(
+        fontFamily = hannaFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeight = 34.sp,
+    ),
 )
