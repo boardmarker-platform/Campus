@@ -49,7 +49,7 @@ internal fun HomeScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        AttendanceBoard(uiState)
+        HomeAttendanceBoard(uiState)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,7 +67,7 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun AttendanceBoard(uiState: HomeUiState) {
+internal fun HomeAttendanceBoard(uiState: HomeUiState) {
     val nickname = "레아"  // 닉네임을 어디서 입력받고 어디서 관리할 것인지
     when (uiState) {
         is HomeUiState.Success -> {
@@ -245,7 +245,7 @@ private fun AttendanceButton() {
         modifier = Modifier.fillMaxSize(),
     ) {
         IconButton(
-            onClick = { },
+            onClick = { }, // 등교/하교 버튼 클릭 이벤트 -> use case 로직 추가
             modifier = Modifier
                 .padding(8.dp)
                 .size(65.dp)
