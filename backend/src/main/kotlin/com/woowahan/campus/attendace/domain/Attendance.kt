@@ -3,6 +3,8 @@ package com.woowahan.campus.attendace.domain
 import jakarta.persistence.Column
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -20,4 +22,6 @@ class Attendance(
     private var checkIn: CheckIn,
     @Embedded
     private var checkOut: CheckOut,
+    @Enumerated(EnumType.STRING)
+    var status: AttendanceStatus,
 )
