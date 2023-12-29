@@ -228,7 +228,6 @@ paths:
           schema:
             type: string
             example: 2023-12-29
-            default: ${today}
           required: false
           description: 시작 날짜
         - in: query
@@ -236,7 +235,6 @@ paths:
           schema:
             type: string
             example: 2023-12-31
-            default: ${today}
           required: false
           description: 끝 날짜
         - in: header

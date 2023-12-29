@@ -17,15 +17,19 @@ class FindMyAttendances(
     @Transactional
     override fun findMyAttendances(
         authorization: String,
-        from: String,
-        to: String
+        from: String?,
+        to: String?
     ): ResponseEntity<FindMyAttendancesResponse> {
         val attendancesResponseList =
-        // 크루 id는 어떻게 받아오는 것이 좋을까요?
-            // argument resolver와 interceptor 가 필요한 시점일 것 같아요!
-            attendanceRepository.findByCrewIdAndDateBetween(1L, LocalDate.parse(from), LocalDate.parse(to))
+            /**
+             * 크루 id는 어떻게 받아오는 것이 좋을까요?
+             * argument resolver와 interceptor 가 필요한 시점일 것 같아요!
+             */
+            attendanceRepository.findByCrewIdAndDateBetween(1L, parseLocalDate(from), parseLocalDate(to))
                 .map { AttendancesListResponse(it.date.toString(), it.status.toString()) }
 
         return ResponseEntity.ok(FindMyAttendancesResponse(attendancesResponseList))
     }
+
+    private fun parseLocalDate(date: String?): LocalDate = LocalDate.now() ?: LocalDate.parse(date)
 }
