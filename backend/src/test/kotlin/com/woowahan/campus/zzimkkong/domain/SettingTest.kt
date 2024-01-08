@@ -68,18 +68,4 @@ class SettingTest : StringSpec({
             )
         }
     }
-
-//    "요일의 형식에 맞지 않는 문자열이 있으면 예외가 발생한다." {
-//        val startTime = LocalTime.of(9, 0)
-//        val endTime = LocalTime.of(10, 0)
-//
-//        shouldThrow<IllegalArgumentException> {
-//            Setting(
-//                startTime = startTime,
-//                endTime = endTime,
-//                maximumMinute = 30,
-//                enableDays = "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY,NOT_A_DAY"
-//            )
-//        }
-//    }
 })
