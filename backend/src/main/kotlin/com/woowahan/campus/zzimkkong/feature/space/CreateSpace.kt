@@ -51,7 +51,7 @@ class CreateSpace(
         return ResponseEntity.created(URI.create("/api/maps/${campus.id}/spaces/${space.id}")).build()
     }
 
-    private fun parseToEnableDays(it: SpacePostSettingsInnerEnabledDayOfWeek): String {
+    private fun parseToEnableDays(it: SpacePostSettingsInnerEnabledDayOfWeek): MutableList<DayOfWeeks> {
         return DayOfWeeks.values()
             .filter { day ->
                 when (day) {
@@ -63,6 +63,6 @@ class CreateSpace(
                     DayOfWeeks.SATURDAY -> it.saturday
                     DayOfWeeks.SUNDAY -> it.sunday
                 }
-            }.joinToString(",") { it.name }
+            }.toMutableList()
     }
 }

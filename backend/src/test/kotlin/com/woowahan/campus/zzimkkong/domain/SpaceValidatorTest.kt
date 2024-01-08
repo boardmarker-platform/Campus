@@ -71,5 +71,7 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String) =
     startTime = LocalTime.parse(startTime),
     endTime = LocalTime.parse(endTime),
     maximumMinute = 30,
-    enableDays = enableDays
+    enableDays = enableDays.split(",")
+        .map(DayOfWeeks.Companion::create)
+        .toMutableList()
 )
