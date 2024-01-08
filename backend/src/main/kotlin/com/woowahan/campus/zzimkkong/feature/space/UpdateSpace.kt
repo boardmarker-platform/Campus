@@ -57,7 +57,7 @@ class UpdateSpace(
         return spaceRepository.save(findSpace)
     }
 
-    private fun parseToEnableDays(it: SpacePutSettingsInnerEnabledDayOfWeek): String {
+    private fun parseToEnableDays(it: SpacePutSettingsInnerEnabledDayOfWeek): MutableList<DayOfWeeks> {
         return DayOfWeeks.values()
             .filter { day ->
                 when (day) {
@@ -69,6 +69,6 @@ class UpdateSpace(
                     DayOfWeeks.SATURDAY -> it.saturday
                     DayOfWeeks.SUNDAY -> it.sunday
                 }
-            }.joinToString(",") { it.name }
+            }.toMutableList()
     }
 }

@@ -18,5 +18,11 @@ enum class DayOfWeeks {
                     valueOf(day)
                 }
         }
+
+        fun create(weekday: String): DayOfWeeks {
+            return values()
+                .firstOrNull { it.name == weekday.uppercase() }
+                ?: throw IllegalArgumentException("유효하지 않은 요일입니다.")
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.woowahan.campus.zzimkkong.feature.reservation
 
 import com.woowahan.campus.zzimkkong.domain.CampusRepository
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks
 import com.woowahan.campus.zzimkkong.domain.ReservationRepository
 import com.woowahan.campus.zzimkkong.domain.Setting
 import com.woowahan.campus.zzimkkong.domain.SpaceRepository
@@ -94,7 +95,9 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String, m
     startTime = LocalTime.parse(startTime),
     endTime = LocalTime.parse(endTime),
     maximumMinute = maximumMinute,
-    enableDays = enableDays
+    enableDays = enableDays.split(",")
+        .map(DayOfWeeks.Companion::create)
+        .toMutableList()
 )
 
 private fun updateReservation(
