@@ -1,5 +1,6 @@
 package com.woowahan.campus.zzimkkong.domain
 
+import jakarta.persistence.Column
 import jakarta.persistence.Convert
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -13,15 +14,19 @@ class Setting(
     val endTime: LocalTime,
     val maximumMinute: Int,
     @Convert(converter = DayOfWeeksConverter::class)
-    private val enableDays: MutableList<DayOfWeeks>,
+    @Column(name = "enable_days")
+    private val _enableDays: MutableList<DayOfWeeks>,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L,
 ) {
 
+    val enableDays: List<DayOfWeeks>
+        get() = _enableDays
+
     init {
         validateTime(startTime, endTime)
-        validateEnableDays(enableDays)
+        validateEnableDays(_enableDays)
     }
 
     private fun validateTime(startTime: LocalTime, endTime: LocalTime) {
@@ -38,6 +43,4 @@ class Setting(
             (this.endTime >= endTime) &&
             (startTime.plusMinutes(this.maximumMinute.toLong()) >= endTime)
     }
-
-    fun getEnableDays(): List<DayOfWeeks> = enableDays
 }

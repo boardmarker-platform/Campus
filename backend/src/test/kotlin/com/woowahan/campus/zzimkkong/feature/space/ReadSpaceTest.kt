@@ -64,13 +64,13 @@ class ReadSpaceTest(
                                             "settingEndTime": "${settings[0].endTime}",
                                             "reservationMaximumTimeUnit": ${settings[0].maximumMinute},
                                             "enabledDayOfWeek": {
-                                                "monday": ${settings[0].getEnableDays().contains(MONDAY)},
-                                                "tuesday": ${settings[0].getEnableDays().contains(TUESDAY)},
-                                                "wednesday": ${settings[0].getEnableDays().contains(WEDNESDAY)},
-                                                "thursday": ${settings[0].getEnableDays().contains(THURSDAY)},
-                                                "friday": ${settings[0].getEnableDays().contains(FRIDAY)},
-                                                "saturday": ${settings[0].getEnableDays().contains(SATURDAY)},
-                                                "sunday": ${settings[0].getEnableDays().contains(SUNDAY)}
+                                                "monday": ${settings[0].enableDays.contains(MONDAY)},
+                                                "tuesday": ${settings[0].enableDays.contains(TUESDAY)},
+                                                "wednesday": ${settings[0].enableDays.contains(WEDNESDAY)},
+                                                "thursday": ${settings[0].enableDays.contains(THURSDAY)},
+                                                "friday": ${settings[0].enableDays.contains(FRIDAY)},
+                                                "saturday": ${settings[0].enableDays.contains(SATURDAY)},
+                                                "sunday": ${settings[0].enableDays.contains(SUNDAY)}
                                             }
                                         },
                                         {
@@ -78,13 +78,13 @@ class ReadSpaceTest(
                                             "settingEndTime": "${settings[1].endTime}",
                                             "reservationMaximumTimeUnit": ${settings[1].maximumMinute},
                                             "enabledDayOfWeek": {
-                                                "monday": ${settings[1].getEnableDays().contains(MONDAY)},
-                                                "tuesday": ${settings[1].getEnableDays().contains(TUESDAY)},
-                                                "wednesday": ${settings[1].getEnableDays().contains(WEDNESDAY)},
-                                                "thursday": ${settings[1].getEnableDays().contains(THURSDAY)},
-                                                "friday": ${settings[1].getEnableDays().contains(FRIDAY)},
-                                                "saturday": ${settings[1].getEnableDays().contains(SATURDAY)},
-                                                "sunday": ${settings[1].getEnableDays().contains(SUNDAY)}
+                                                "monday": ${settings[1].enableDays.contains(MONDAY)},
+                                                "tuesday": ${settings[1].enableDays.contains(TUESDAY)},
+                                                "wednesday": ${settings[1].enableDays.contains(WEDNESDAY)},
+                                                "thursday": ${settings[1].enableDays.contains(THURSDAY)},
+                                                "friday": ${settings[1].enableDays.contains(FRIDAY)},
+                                                "saturday": ${settings[1].enableDays.contains(SATURDAY)},
+                                                "sunday": ${settings[1].enableDays.contains(SUNDAY)}
                                             }
                                         }
                                     ]
@@ -118,13 +118,13 @@ class ReadSpaceTest(
                                     "settingEndTime": "${settings[0].endTime}",
                                     "reservationMaximumTimeUnit": ${settings[0].maximumMinute},
                                     "enabledDayOfWeek": {
-                                        "monday": ${settings[0].getEnableDays().contains(MONDAY)},
-                                        "tuesday": ${settings[0].getEnableDays().contains(TUESDAY)},
-                                        "wednesday": ${settings[0].getEnableDays().contains(WEDNESDAY)},
-                                        "thursday": ${settings[0].getEnableDays().contains(THURSDAY)},
-                                        "friday": ${settings[0].getEnableDays().contains(FRIDAY)},
-                                        "saturday": ${settings[0].getEnableDays().contains(SATURDAY)},
-                                        "sunday": ${settings[0].getEnableDays().contains(SUNDAY)}
+                                        "monday": ${settings[0].enableDays.contains(MONDAY)},
+                                        "tuesday": ${settings[0].enableDays.contains(TUESDAY)},
+                                        "wednesday": ${settings[0].enableDays.contains(WEDNESDAY)},
+                                        "thursday": ${settings[0].enableDays.contains(THURSDAY)},
+                                        "friday": ${settings[0].enableDays.contains(FRIDAY)},
+                                        "saturday": ${settings[0].enableDays.contains(SATURDAY)},
+                                        "sunday": ${settings[0].enableDays.contains(SUNDAY)}
                                     }
                                 },
                                 {
@@ -132,13 +132,13 @@ class ReadSpaceTest(
                                     "settingEndTime": "${settings[1].endTime}",
                                     "reservationMaximumTimeUnit": ${settings[1].maximumMinute},
                                     "enabledDayOfWeek": {
-                                        "monday": ${settings[1].getEnableDays().contains(MONDAY)},
-                                        "tuesday": ${settings[1].getEnableDays().contains(TUESDAY)},
-                                        "wednesday": ${settings[1].getEnableDays().contains(WEDNESDAY)},
-                                        "thursday": ${settings[1].getEnableDays().contains(THURSDAY)},
-                                        "friday": ${settings[1].getEnableDays().contains(FRIDAY)},
-                                        "saturday": ${settings[1].getEnableDays().contains(SATURDAY)},
-                                        "sunday": ${settings[1].getEnableDays().contains(SUNDAY)}
+                                        "monday": ${settings[1].enableDays.contains(MONDAY)},
+                                        "tuesday": ${settings[1].enableDays.contains(TUESDAY)},
+                                        "wednesday": ${settings[1].enableDays.contains(WEDNESDAY)},
+                                        "thursday": ${settings[1].enableDays.contains(THURSDAY)},
+                                        "friday": ${settings[1].enableDays.contains(FRIDAY)},
+                                        "saturday": ${settings[1].enableDays.contains(SATURDAY)},
+                                        "sunday": ${settings[1].enableDays.contains(SUNDAY)}
                                     }
                                 }
                             ]

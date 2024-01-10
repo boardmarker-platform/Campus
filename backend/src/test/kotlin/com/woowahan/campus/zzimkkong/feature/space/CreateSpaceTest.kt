@@ -45,7 +45,7 @@ class CreateSpaceTest(
                                 settingStartTime = setting.startTime.toString(),
                                 settingEndTime = setting.endTime.toString(),
                                 reservationMaximumTimeUnit = setting.maximumMinute,
-                                enabledDayOfWeek = getDayOfWeekForPost(setting.getEnableDays()),
+                                enabledDayOfWeek = getDayOfWeekForPost(setting.enableDays)
                             )
                         }
                     )

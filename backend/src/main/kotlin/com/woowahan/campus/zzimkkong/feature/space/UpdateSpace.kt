@@ -48,7 +48,7 @@ class UpdateSpace(
                     startTime = LocalTime.parse(it.settingStartTime),
                     endTime = LocalTime.parse(it.settingEndTime),
                     maximumMinute = it.reservationMaximumTimeUnit,
-                    enableDays = parseToEnableDays(it.enabledDayOfWeek)
+                    _enableDays = parseToEnableDays(it.enabledDayOfWeek)
                 )
             }.toList()
         )

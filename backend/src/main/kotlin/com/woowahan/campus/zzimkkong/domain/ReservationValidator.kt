@@ -12,7 +12,7 @@ class ReservationValidator {
             require(space.reservationEnabled) { "예약이 불가능한 공간입니다." }
 
             val validSettings = space.settings.filter {
-                it.getEnableDays().contains(DayOfWeeks.valueOf(reservation.date.dayOfWeek.name))
+                it.enableDays.contains(DayOfWeeks.valueOf(reservation.date.dayOfWeek.name))
             }
 
             require(

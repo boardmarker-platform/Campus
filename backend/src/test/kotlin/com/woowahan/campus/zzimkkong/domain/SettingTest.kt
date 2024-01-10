@@ -14,7 +14,7 @@ class SettingTest : StringSpec({
             startTime = startTime,
             endTime = endTime,
             maximumMinute = 30,
-            enableDays = mutableListOf(
+            _enableDays = mutableListOf(
                 DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                 DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
             )
@@ -30,7 +30,7 @@ class SettingTest : StringSpec({
                 startTime = startTime,
                 endTime = endTime,
                 maximumMinute = 30,
-                enableDays = mutableListOf(
+                _enableDays = mutableListOf(
                     DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                     DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
                 )
@@ -47,7 +47,7 @@ class SettingTest : StringSpec({
                 startTime = startTime,
                 endTime = endTime,
                 maximumMinute = 30,
-                enableDays = mutableListOf(
+                _enableDays = mutableListOf(
                     DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                     DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
                 )
@@ -64,7 +64,7 @@ class SettingTest : StringSpec({
                 startTime = startTime,
                 endTime = endTime,
                 maximumMinute = 30,
-                enableDays = mutableListOf(DayOfWeeks.MONDAY, DayOfWeeks.MONDAY)
+                _enableDays = mutableListOf(DayOfWeeks.MONDAY, DayOfWeeks.MONDAY)
             )
         }
     }

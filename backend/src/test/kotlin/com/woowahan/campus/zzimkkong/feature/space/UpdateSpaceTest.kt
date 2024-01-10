@@ -62,7 +62,7 @@ class UpdateSpaceTest(
                                 settingStartTime = it.startTime.toString(),
                                 settingEndTime = it.endTime.toString(),
                                 reservationMaximumTimeUnit = it.maximumMinute,
-                                getDayOfWeekForPut(it.getEnableDays())
+                                getDayOfWeekForPut(it.enableDays)
                             )
                         }.toList()
                     )

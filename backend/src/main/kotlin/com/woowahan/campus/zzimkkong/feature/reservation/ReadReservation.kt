@@ -88,7 +88,7 @@ class ReadReservation(
     ) = spaces.associate {
         val isValidSpace = it.reservationEnabled &&
             it.settings.any { setting ->
-                setting.getEnableDays()
+                setting.enableDays
                     .contains(DayOfWeeks.valueOf(startLocalDateTime.toLocalDate().dayOfWeek.name)) &&
                     setting.isEnableTime(startLocalDateTime.toLocalTime(), endLocalDateTime.toLocalTime())
             }
