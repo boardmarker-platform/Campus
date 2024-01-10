@@ -72,5 +72,5 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String) =
     maximumMinute = 30,
     _enableDays = enableDays.split(",")
         .map(DayOfWeeks.Companion::create)
-        .toMutableList()
+        .toSortedSet()
 )

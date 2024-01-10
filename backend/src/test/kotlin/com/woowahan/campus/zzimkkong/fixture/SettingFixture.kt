@@ -11,7 +11,7 @@ class SettingFixture {
             startTime = LocalTime.of(10, 0, 0),
             endTime = LocalTime.of(11, 0, 0),
             maximumMinute = 60,
-            _enableDays = mutableListOf(
+            _enableDays = sortedSetOf(
                 DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY
             )
         )
@@ -20,7 +20,7 @@ class SettingFixture {
             startTime = LocalTime.of(11, 0, 0),
             endTime = LocalTime.of(12, 0, 0),
             maximumMinute = 60,
-            _enableDays = mutableListOf(
+            _enableDays = sortedSetOf(
                 DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY
             )
         )
@@ -29,14 +29,14 @@ class SettingFixture {
             startTime = LocalTime.of(9, 0, 0),
             endTime = LocalTime.of(10, 0, 0),
             maximumMinute = 60,
-            _enableDays = mutableListOf(DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY)
+            _enableDays = sortedSetOf(DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY)
         )
 
         fun 회의실_예약_설정_4() = Setting(
             startTime = LocalTime.of(10, 0, 0),
             endTime = LocalTime.of(18, 0, 0),
             maximumMinute = 60,
-            _enableDays = mutableListOf(DayOfWeeks.MONDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SUNDAY)
+            _enableDays = sortedSetOf(DayOfWeeks.MONDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SUNDAY)
         )
     }
 }

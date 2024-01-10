@@ -14,7 +14,7 @@ class SettingTest : StringSpec({
             startTime = startTime,
             endTime = endTime,
             maximumMinute = 30,
-            _enableDays = mutableListOf(
+            _enableDays = sortedSetOf(
                 DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                 DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
             )
@@ -30,7 +30,7 @@ class SettingTest : StringSpec({
                 startTime = startTime,
                 endTime = endTime,
                 maximumMinute = 30,
-                _enableDays = mutableListOf(
+                _enableDays = sortedSetOf(
                     DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                     DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
                 )
@@ -47,24 +47,10 @@ class SettingTest : StringSpec({
                 startTime = startTime,
                 endTime = endTime,
                 maximumMinute = 30,
-                _enableDays = mutableListOf(
+                _enableDays = sortedSetOf(
                     DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY,
                     DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY
                 )
-            )
-        }
-    }
-
-    "중복된 요일이 있으면 예외가 발생한다." {
-        val startTime = LocalTime.of(9, 0)
-        val endTime = LocalTime.of(10, 0)
-
-        shouldThrow<IllegalArgumentException> {
-            Setting(
-                startTime = startTime,
-                endTime = endTime,
-                maximumMinute = 30,
-                _enableDays = mutableListOf(DayOfWeeks.MONDAY, DayOfWeeks.MONDAY)
             )
         }
     }
