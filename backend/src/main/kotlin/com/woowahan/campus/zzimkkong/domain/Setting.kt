@@ -25,9 +25,6 @@ class Setting(
     val enableDays: List<DayOfWeeks>
         get() = _enableDays.toList()
 
-    val enableDays2: Set<DayOfWeeks>
-        get() = _enableDays.toSet()
-
     init {
         validateTime(startTime, endTime)
     }
