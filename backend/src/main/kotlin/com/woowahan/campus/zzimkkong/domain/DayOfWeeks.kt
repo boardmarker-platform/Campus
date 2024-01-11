@@ -11,6 +11,7 @@ enum class DayOfWeeks {
     ;
 
     companion object {
+
         fun from(weekdays: List<String>): List<DayOfWeeks> {
             return weekdays.map { it.uppercase() }
                 .map { day ->

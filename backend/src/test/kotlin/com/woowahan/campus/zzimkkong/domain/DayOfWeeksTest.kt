@@ -8,14 +8,8 @@ import io.kotest.matchers.result.beSuccess
 class DayOfWeeksTest : StringSpec({
 
     "요일명이 올바르면 정상적으로 생성" {
-        assertSoftly {
-            beSuccess(DayOfWeeks.create("MONDAY"))
-            beSuccess(DayOfWeeks.create("TUESDAY"))
-            beSuccess(DayOfWeeks.create("WEDNESDAY"))
-            beSuccess(DayOfWeeks.create("THURSDAY"))
-            beSuccess(DayOfWeeks.create("FRIDAY"))
-            beSuccess(DayOfWeeks.create("SATURDAY"))
-            beSuccess(DayOfWeeks.create("SUNDAY"))
+        DayOfWeeks.entries.forEach {
+            assertSoftly { beSuccess(DayOfWeeks.create(it.name)) }
         }
     }
 
