@@ -9,13 +9,13 @@ class DayOfWeeksTest : StringSpec({
 
     "요일명이 올바르면 정상적으로 생성" {
         DayOfWeeks.entries.forEach {
-            assertSoftly { beSuccess(DayOfWeeks.create(it.name)) }
+            assertSoftly { beSuccess(DayOfWeeks.from(it.name)) }
         }
     }
 
     "요일명이 올바르지 않으면 예외" {
         shouldThrow<IllegalArgumentException> {
-            DayOfWeeks.create("wrongName")
+            DayOfWeeks.from("wrongName")
         }
     }
 })

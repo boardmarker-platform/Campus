@@ -13,7 +13,7 @@ class DayOfWeeksConverter : AttributeConverter<SortedSet<DayOfWeeks>, String> {
 
     override fun convertToEntityAttribute(dbData: String): SortedSet<DayOfWeeks> {
         return dbData.split(",")
-            .map(DayOfWeeks.Companion::create)
+            .map(DayOfWeeks.Companion::from)
             .toSortedSet()
     }
 }

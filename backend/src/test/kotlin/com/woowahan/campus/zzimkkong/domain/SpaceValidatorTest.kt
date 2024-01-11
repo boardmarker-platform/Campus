@@ -71,6 +71,6 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String) =
     endTime = LocalTime.parse(endTime),
     maximumMinute = 30,
     _enableDays = enableDays.split(",")
-        .map(DayOfWeeks.Companion::create)
+        .map(DayOfWeeks.Companion::from)
         .toSortedSet()
 )
