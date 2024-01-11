@@ -12,9 +12,7 @@ enum class DayOfWeeks {
 
     companion object {
         fun from(weekday: String): DayOfWeeks {
-            return values()
-                .firstOrNull { it.name == weekday.uppercase() }
-                ?: throw IllegalArgumentException("유효하지 않은 요일입니다.")
+            return requireNotNull(values().firstOrNull { it.name == weekday.uppercase() }) { "유효하지 않은 요일입니다." }
         }
     }
 }
