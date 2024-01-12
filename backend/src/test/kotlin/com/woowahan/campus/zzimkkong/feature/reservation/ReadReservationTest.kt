@@ -18,6 +18,7 @@ import io.mockk.every
 import io.mockk.mockkStatic
 import io.restassured.RestAssured
 import openapi.model.ReservationGetSingle
+import openapi.model.ReservationsGet
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import java.time.LocalDateTime
@@ -50,7 +51,7 @@ class ReadReservationTest(
         val space2 = spaceRepository.save(랜딩_강의장(campus.id, true, listOf(setting2)))
         val space3 = spaceRepository.save(랜딩_강의장(campus.id, false, emptyList()))
         val reservation1 = reservationRepository.save(회의실_예약(space1.id, "2023-11-07", "11:00", "12:00"))
-        reservationRepository.save(회의실_예약(space1.id, "2023-11-07", "12:00", "13:00"))
+        val reservation2 = reservationRepository.save(회의실_예약(space1.id, "2023-11-07", "12:00", "13:00"))
         reservationRepository.save(회의실_예약(space2.id, "2023-11-07", "12:00", "13:00"))
 
         When("예약 가능 여부를 조회한다.") {
@@ -67,7 +68,7 @@ class ReadReservationTest(
             Then("200 응답과 공간의 예약 가능 여부를 반환한다.") {
                 response.statusCode() shouldBe 200
                 response.asPrettyJson() shouldBe
-                    """
+                        """
                         {
                             "mapId": 1,
                             "spaces": [
@@ -115,30 +116,13 @@ class ReadReservationTest(
                 .`when`().get("/api/maps/{mapId}/spaces/{spaceId}/reservations", campus.id, space1.id)
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(ReservationsGet::class.java)
 
             Then("200 응답과 조회 결과를 반환한다.") {
                 response.statusCode() shouldBe 200
-                response.asPrettyJson() shouldBe
-                    """
-                        {
-                            "reservations": [
-                                {
-                                    "id": 1,
-                                    "startDateTime": "2023-11-07T11:00",
-                                    "endDateTime": "2023-11-07T12:00",
-                                    "name": "회의실 예약",
-                                    "description": "회의실 예약 설명"
-                                },
-                                {
-                                    "id": 2,
-                                    "startDateTime": "2023-11-07T12:00",
-                                    "endDateTime": "2023-11-07T13:00",
-                                    "name": "회의실 예약",
-                                    "description": "회의실 예약 설명"
-                                }
-                            ]
-                        }
-                    """.trimIndent()
+                responseBody shouldBeEqualToComparingFields ReservationFixture.`복수 예약 응답`(
+                    listOf(reservation1, reservation2)
+                )
             }
         }
     }
