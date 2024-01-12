@@ -1,6 +1,7 @@
 package com.woowahan.campus.zzimkkong.fixture
 
 import com.woowahan.campus.zzimkkong.domain.Campus
+import openapi.model.MapGetAll
 import openapi.model.MapGetSingle
 
 @Suppress("NonAsciiCharacters")
@@ -29,6 +30,21 @@ class CampusFixture {
             campus.drawing,
             campus.thumbnail,
             slackUrl,
+        )
+
+        fun `복수 캠퍼스 응답`(
+            campuses: List<Campus>,
+            slackUrls: List<String>,
+        ): MapGetAll = MapGetAll(
+            campuses.mapIndexed { index, campus ->
+                MapGetSingle(
+                    campus.id.toInt(),
+                    campus.name,
+                    campus.drawing,
+                    campus.thumbnail,
+                    slackUrls[index],
+                )
+            }
         )
     }
 }
