@@ -1,9 +1,11 @@
 package com.woowahan.campus.zzimkkong.fixture
 
 import com.woowahan.campus.zzimkkong.domain.Reservation
+import openapi.model.ReservationGetSingle
 import java.time.LocalDate
 import java.time.LocalTime
 
+@Suppress("NonAsciiCharacters")
 class ReservationFixture {
 
     companion object {
@@ -42,5 +44,13 @@ class ReservationFixture {
                 password = password
             )
         }
+
+        fun `단일 예약 응답`(reservation: Reservation): ReservationGetSingle = ReservationGetSingle(
+            id = reservation.id.toInt(),
+            startDateTime = "${reservation.date}T${reservation.startTime}",
+            endDateTime = "${reservation.date}T${reservation.endTime}",
+            name = reservation.name,
+            description = reservation.description,
+        )
     }
 }

@@ -7,14 +7,17 @@ import com.woowahan.campus.zzimkkong.domain.ReservationRepository
 import com.woowahan.campus.zzimkkong.domain.Setting
 import com.woowahan.campus.zzimkkong.domain.SpaceRepository
 import com.woowahan.campus.zzimkkong.fixture.CampusFixture
+import com.woowahan.campus.zzimkkong.fixture.ReservationFixture
 import com.woowahan.campus.zzimkkong.fixture.ReservationFixture.Companion.회의실_예약
 import com.woowahan.campus.zzimkkong.fixture.SpaceFixture.Companion.굿샷_강의장
 import com.woowahan.campus.zzimkkong.fixture.SpaceFixture.Companion.랜딩_강의장
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkStatic
 import io.restassured.RestAssured
+import openapi.model.ReservationGetSingle
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import java.time.LocalDateTime
@@ -97,19 +100,11 @@ class ReadReservationTest(
                 )
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(ReservationGetSingle::class.java)
 
             Then("200 응답과 조회 결과를 반환한다.") {
                 response.statusCode() shouldBe 200
-                response.asPrettyJson() shouldBe
-                    """
-                        {
-                            "id": 1,
-                            "startDateTime": "2023-11-07T11:00",
-                            "endDateTime": "2023-11-07T12:00",
-                            "name": "회의실 예약",
-                            "description": "회의실 예약 설명"
-                        }
-                    """.trimIndent()
+                responseBody shouldBeEqualToComparingFields ReservationFixture.`단일 예약 응답`(reservation1)
             }
         }
 
