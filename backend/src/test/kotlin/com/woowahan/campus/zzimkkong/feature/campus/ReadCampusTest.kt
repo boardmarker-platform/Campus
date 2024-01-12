@@ -8,8 +8,10 @@ import com.woowahan.campus.zzimkkong.domain.SlackChannelRepository
 import com.woowahan.campus.zzimkkong.fixture.CampusFixture
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
 import io.restassured.RestAssured
+import openapi.model.MapGetSingle
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 
@@ -65,20 +67,12 @@ class ReadCampusTest(
                 .`when`().get("/api/maps/${campus.id}")
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(MapGetSingle::class.java)
 
             Then("200 응답과 저장된 캠퍼스 정보들을 반환한다.") {
                 assertSoftly {
                     response.statusCode() shouldBe 200
-                    response.asPrettyJson() shouldBe
-                        """
-                            {
-                                "mapId": ${campus.id},
-                                "mapName": "${campus.name}",
-                                "mapDrawing": "${campus.drawing}",
-                                "thumbnail": "${campus.thumbnail}",
-                                "slackUrl": "$slackUrl"
-                            }
-                        """.trimIndent()
+                    responseBody shouldBeEqualToComparingFields CampusFixture.`단일 캠퍼스 응답`(campus, slackUrl)
                 }
             }
         }
