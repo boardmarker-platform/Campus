@@ -25,11 +25,11 @@ class CampusFixture {
             campus: Campus,
             slackUrl: String,
         ): MapGetSingle = MapGetSingle(
-            campus.id.toInt(),
-            campus.name,
-            campus.drawing,
-            campus.thumbnail,
-            slackUrl,
+            mapId = campus.id.toInt(),
+            mapName = campus.name,
+            mapDrawing = campus.drawing,
+            thumbnail = campus.thumbnail,
+            slackUrl = slackUrl,
         )
 
         fun `복수 캠퍼스 응답`(
@@ -38,11 +38,11 @@ class CampusFixture {
         ): MapGetAll = MapGetAll(
             campuses.mapIndexed { index, campus ->
                 MapGetSingle(
-                    campus.id.toInt(),
-                    campus.name,
-                    campus.drawing,
-                    campus.thumbnail,
-                    slackUrls[index],
+                    mapId = campus.id.toInt(),
+                    mapName = campus.name,
+                    mapDrawing = campus.drawing,
+                    thumbnail = campus.thumbnail,
+                    slackUrl = slackUrls[index],
                 )
             }
         )
