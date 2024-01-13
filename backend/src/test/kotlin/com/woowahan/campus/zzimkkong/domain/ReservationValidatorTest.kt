@@ -262,5 +262,7 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String, m
     startTime = LocalTime.parse(startTime),
     endTime = LocalTime.parse(endTime),
     maximumMinute = maximumMinute,
-    enableDays = enableDays
+    _enableDays = enableDays.split(",")
+        .map(DayOfWeeks.Companion::from)
+        .toSortedSet()
 )

@@ -12,7 +12,6 @@ class SpaceValidatorTest : StringSpec({
         val setting1 = getSetting("MONDAY", "11:00", "13:00")
         val setting2 = getSetting("MONDAY", "12:00", "14:00")
         val space = SpaceFixture.굿샷_강의장(0L, true, listOf(setting1, setting2))
-
         shouldThrow<IllegalArgumentException> {
             SpaceSettingsValidator.validate(space)
         }
@@ -71,5 +70,7 @@ private fun getSetting(enableDays: String, startTime: String, endTime: String) =
     startTime = LocalTime.parse(startTime),
     endTime = LocalTime.parse(endTime),
     maximumMinute = 30,
-    enableDays = enableDays
+    _enableDays = enableDays.split(",")
+        .map(DayOfWeeks.Companion::from)
+        .toSortedSet()
 )

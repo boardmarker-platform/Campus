@@ -10,7 +10,7 @@ class SpaceSettingsValidator {
 
         private fun validateSettings(settings: List<Setting>) {
             for ((index, setting) in settings.withIndex()) {
-                val enableDays = setting.getEnableDays()
+                val enableDays = setting.enableDays
                 settings.subList(index + 1, settings.size).forEach { otherSetting ->
                     validateDuplicatedSetting(enableDays, otherSetting, setting)
                 }
@@ -43,6 +43,6 @@ class SpaceSettingsValidator {
         private fun containsDuplicatedDay(
             enableDays: List<DayOfWeeks>,
             otherSetting: Setting,
-        ) = enableDays.intersect(otherSetting.getEnableDays().toSet()).isNotEmpty()
+        ) = enableDays.intersect(otherSetting.enableDays.toSet()).isNotEmpty()
     }
 }

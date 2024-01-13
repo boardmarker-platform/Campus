@@ -48,13 +48,13 @@ class ReadSpace(
             settingEndTime = it.endTime.toString(),
             reservationMaximumTimeUnit = it.maximumMinute,
             enabledDayOfWeek = SpaceGetSingleSettingsInnerEnabledDayOfWeek(
-                monday = it.getEnableDays().contains(DayOfWeeks.MONDAY),
-                tuesday = it.getEnableDays().contains(DayOfWeeks.TUESDAY),
-                wednesday = it.getEnableDays().contains(DayOfWeeks.WEDNESDAY),
-                thursday = it.getEnableDays().contains(DayOfWeeks.THURSDAY),
-                friday = it.getEnableDays().contains(DayOfWeeks.FRIDAY),
-                saturday = it.getEnableDays().contains(DayOfWeeks.SATURDAY),
-                sunday = it.getEnableDays().contains(DayOfWeeks.SUNDAY),
+                monday = it.enableDays.contains(DayOfWeeks.MONDAY),
+                tuesday = it.enableDays.contains(DayOfWeeks.TUESDAY),
+                wednesday = it.enableDays.contains(DayOfWeeks.WEDNESDAY),
+                thursday = it.enableDays.contains(DayOfWeeks.THURSDAY),
+                friday = it.enableDays.contains(DayOfWeeks.FRIDAY),
+                saturday = it.enableDays.contains(DayOfWeeks.SATURDAY),
+                sunday = it.enableDays.contains(DayOfWeeks.SUNDAY),
             )
         )
     }.toList()
