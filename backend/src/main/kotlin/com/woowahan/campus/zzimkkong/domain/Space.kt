@@ -20,7 +20,7 @@ class Space(
     val settings: MutableList<Setting>,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0L,
+    val id: Long = 0L,
 ) {
     fun update(
         name: String,

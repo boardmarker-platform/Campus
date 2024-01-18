@@ -19,7 +19,7 @@ class Setting(
     val _enableDays: SortedSet<DayOfWeeks>,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0L,
+    val id: Long = 0L,
 ) {
 
     val enableDays: List<DayOfWeeks>
