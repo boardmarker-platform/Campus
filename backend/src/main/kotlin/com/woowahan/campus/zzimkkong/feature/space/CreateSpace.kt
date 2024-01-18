@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 import java.time.LocalTime
+import java.util.SortedSet
 
 @RestController
 class CreateSpace(
@@ -38,7 +39,7 @@ class CreateSpace(
                         startTime = LocalTime.parse(it.settingStartTime),
                         endTime = LocalTime.parse(it.settingEndTime),
                         maximumMinute = it.reservationMaximumTimeUnit,
-                        enableDays = parseToEnableDays(it.enabledDayOfWeek)
+                        _enableDays = parseToEnableDays(it.enabledDayOfWeek)
                     )
                 }.toMutableList()
             )
@@ -51,7 +52,7 @@ class CreateSpace(
         return ResponseEntity.created(URI.create("/api/maps/${campus.id}/spaces/${space.id}")).build()
     }
 
-    private fun parseToEnableDays(it: SpacePostSettingsInnerEnabledDayOfWeek): String {
+    private fun parseToEnableDays(it: SpacePostSettingsInnerEnabledDayOfWeek): SortedSet<DayOfWeeks> {
         return DayOfWeeks.values()
             .filter { day ->
                 when (day) {
@@ -63,6 +64,6 @@ class CreateSpace(
                     DayOfWeeks.SATURDAY -> it.saturday
                     DayOfWeeks.SUNDAY -> it.sunday
                 }
-            }.joinToString(",") { it.name }
+            }.toSortedSet()
     }
 }

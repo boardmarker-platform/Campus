@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalTime
+import java.util.SortedSet
 
 @RestController
 class UpdateSpace(
@@ -48,7 +49,7 @@ class UpdateSpace(
                     startTime = LocalTime.parse(it.settingStartTime),
                     endTime = LocalTime.parse(it.settingEndTime),
                     maximumMinute = it.reservationMaximumTimeUnit,
-                    enableDays = parseToEnableDays(it.enabledDayOfWeek)
+                    _enableDays = parseToEnableDays(it.enabledDayOfWeek)
                 )
             }.toList()
         )
@@ -57,7 +58,7 @@ class UpdateSpace(
         return spaceRepository.save(findSpace)
     }
 
-    private fun parseToEnableDays(it: SpacePutSettingsInnerEnabledDayOfWeek): String {
+    private fun parseToEnableDays(it: SpacePutSettingsInnerEnabledDayOfWeek): SortedSet<DayOfWeeks> {
         return DayOfWeeks.values()
             .filter { day ->
                 when (day) {
@@ -69,6 +70,6 @@ class UpdateSpace(
                     DayOfWeeks.SATURDAY -> it.saturday
                     DayOfWeeks.SUNDAY -> it.sunday
                 }
-            }.joinToString(",") { it.name }
+            }.toSortedSet()
     }
 }

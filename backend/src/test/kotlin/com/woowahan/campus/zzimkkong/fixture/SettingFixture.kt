@@ -20,28 +20,32 @@ class SettingFixture {
             startTime = LocalTime.of(10, 0, 0),
             endTime = LocalTime.of(11, 0, 0),
             maximumMinute = 60,
-            enableDays = "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY",
+            _enableDays = sortedSetOf(
+                DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY
+            )
         )
 
         fun 회의실_예약_설정_2() = Setting(
             startTime = LocalTime.of(11, 0, 0),
             endTime = LocalTime.of(12, 0, 0),
             maximumMinute = 60,
-            enableDays = "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY",
+            _enableDays = sortedSetOf(
+                DayOfWeeks.MONDAY, DayOfWeeks.TUESDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.THURSDAY, DayOfWeeks.FRIDAY
+            )
         )
 
         fun 회의실_예약_설정_3() = Setting(
             startTime = LocalTime.of(9, 0, 0),
             endTime = LocalTime.of(10, 0, 0),
             maximumMinute = 60,
-            enableDays = "SATURDAY,SUNDAY",
+            _enableDays = sortedSetOf(DayOfWeeks.SATURDAY, DayOfWeeks.SUNDAY)
         )
 
         fun 회의실_예약_설정_4() = Setting(
             startTime = LocalTime.of(10, 0, 0),
             endTime = LocalTime.of(18, 0, 0),
             maximumMinute = 60,
-            enableDays = "MONDAY,WEDNESDAY,FRIDAY,SUNDAY",
+            _enableDays = sortedSetOf(DayOfWeeks.MONDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SUNDAY)
         )
 
         fun `회의실 예약 설정 응답`(
