@@ -1,7 +1,6 @@
 package com.woowahan.campus.zzimkkong.feature.reservation
 
 import com.woowahan.campus.support.DatabaseInitializer
-import com.woowahan.campus.support.asPrettyJson
 import com.woowahan.campus.zzimkkong.domain.CampusRepository
 import com.woowahan.campus.zzimkkong.domain.ReservationRepository
 import com.woowahan.campus.zzimkkong.domain.Setting
@@ -19,6 +18,8 @@ import io.mockk.mockkStatic
 import io.restassured.RestAssured
 import openapi.model.ReservationGetSingle
 import openapi.model.ReservationsGet
+import openapi.model.SpaceGetReservationEnabled
+import openapi.model.SpaceGetReservationEnabledSpacesInner
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import java.time.LocalDateTime
@@ -64,29 +65,18 @@ class ReadReservationTest(
                 .`when`().get("/api/maps/{mapId}/spaces/availability", campus.id)
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(SpaceGetReservationEnabled::class.java)
 
             Then("200 응답과 공간의 예약 가능 여부를 반환한다.") {
                 response.statusCode() shouldBe 200
-                response.asPrettyJson() shouldBe
-                        """
-                        {
-                            "mapId": 1,
-                            "spaces": [
-                                {
-                                    "spaceId": ${space1.id},
-                                    "isAvailable": false
-                                },
-                                {
-                                    "spaceId": ${space2.id},
-                                    "isAvailable": true
-                                },
-                                {
-                                    "spaceId": ${space3.id},
-                                    "isAvailable": false
-                                }
-                            ]
-                        }
-                    """.trimIndent()
+                responseBody shouldBeEqualToComparingFields SpaceGetReservationEnabled(
+                    mapId = campus.id.toInt(),
+                    spaces = listOf(
+                        SpaceGetReservationEnabledSpacesInner(space1.id.toInt(), false),
+                        SpaceGetReservationEnabledSpacesInner(space2.id.toInt(), true),
+                        SpaceGetReservationEnabledSpacesInner(space3.id.toInt(), false)
+                    )
+                )
             }
         }
 
