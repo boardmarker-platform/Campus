@@ -14,7 +14,7 @@ class Campus(
     var thumbnail: String,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0L,
+    val id: Long = 0L,
 ) {
     fun updateThumbnail(thumbnail: String) {
         this.thumbnail = thumbnail

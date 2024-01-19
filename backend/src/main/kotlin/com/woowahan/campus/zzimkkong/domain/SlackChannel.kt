@@ -13,5 +13,5 @@ class SlackChannel(
     val campusId: Long,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0L,
+    val id: Long = 0L,
 )
