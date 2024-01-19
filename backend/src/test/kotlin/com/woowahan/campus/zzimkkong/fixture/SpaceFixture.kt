@@ -2,7 +2,10 @@ package com.woowahan.campus.zzimkkong.fixture
 
 import com.woowahan.campus.zzimkkong.domain.Setting
 import com.woowahan.campus.zzimkkong.domain.Space
+import openapi.model.SpaceGetAll
+import openapi.model.SpaceGetSingle
 
+@Suppress("NonAsciiCharacters")
 class SpaceFixture {
 
     companion object {
@@ -27,6 +30,28 @@ class SpaceFixture {
             area = "{ \"id\": \"1\", \"type\" : \"rect\", \"x\": \"10\", \"y\": \"10\", \"width\": \"30\", \"height\": \"30\" }",
             reservationEnabled = reservationEnabled,
             settings = settings.toMutableList()
+        )
+
+        fun `단일 회의실 응답`(space: Space): SpaceGetSingle = SpaceGetSingle(
+            id = space.id.toInt(),
+            name = space.name,
+            color = space.color,
+            area = space.area,
+            reservationEnable = space.reservationEnabled,
+            settings = space.settings.map { SettingFixture.`회의실 예약 설정 응답`(it) }
+        )
+
+        fun `복수 회의실 응답`(spaces: List<Space>): SpaceGetAll = SpaceGetAll(
+            spaces.map { space ->
+                SpaceGetSingle(
+                    id = space.id.toInt(),
+                    name = space.name,
+                    color = space.color,
+                    area = space.area,
+                    reservationEnable = space.reservationEnabled,
+                    settings = space.settings.map { SettingFixture.`회의실 예약 설정 응답`(it) }
+                )
+            }
         )
     }
 }

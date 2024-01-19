@@ -1,9 +1,18 @@
 package com.woowahan.campus.zzimkkong.fixture
 
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.FRIDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.MONDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.SATURDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.SUNDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.THURSDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.TUESDAY
+import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.WEDNESDAY
 import com.woowahan.campus.zzimkkong.domain.Setting
+import openapi.model.SpaceGetSingleSettingsInner
+import openapi.model.SpaceGetSingleSettingsInnerEnabledDayOfWeek
 import java.time.LocalTime
 
+@Suppress("NonAsciiCharacters")
 class SettingFixture {
     companion object {
 
@@ -37,6 +46,23 @@ class SettingFixture {
             endTime = LocalTime.of(18, 0, 0),
             maximumMinute = 60,
             _enableDays = sortedSetOf(DayOfWeeks.MONDAY, DayOfWeeks.WEDNESDAY, DayOfWeeks.FRIDAY, DayOfWeeks.SUNDAY)
+        )
+
+        fun `회의실 예약 설정 응답`(
+            setting: Setting,
+        ): SpaceGetSingleSettingsInner = SpaceGetSingleSettingsInner(
+            settingStartTime = setting.startTime.toString(),
+            settingEndTime = setting.endTime.toString(),
+            reservationMaximumTimeUnit = setting.maximumMinute,
+            enabledDayOfWeek = SpaceGetSingleSettingsInnerEnabledDayOfWeek(
+                monday = setting.getEnableDays().contains(MONDAY),
+                tuesday = setting.getEnableDays().contains(TUESDAY),
+                wednesday = setting.getEnableDays().contains(WEDNESDAY),
+                thursday = setting.getEnableDays().contains(THURSDAY),
+                friday = setting.getEnableDays().contains(FRIDAY),
+                saturday = setting.getEnableDays().contains(SATURDAY),
+                sunday = setting.getEnableDays().contains(SUNDAY),
+            )
         )
     }
 }

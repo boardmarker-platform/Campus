@@ -1,23 +1,18 @@
 package com.woowahan.campus.zzimkkong.feature.space
 
 import com.woowahan.campus.support.DatabaseInitializer
-import com.woowahan.campus.support.asPrettyJson
 import com.woowahan.campus.zzimkkong.domain.CampusRepository
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.FRIDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.MONDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.SATURDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.SUNDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.THURSDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.TUESDAY
-import com.woowahan.campus.zzimkkong.domain.DayOfWeeks.WEDNESDAY
 import com.woowahan.campus.zzimkkong.domain.SpaceRepository
 import com.woowahan.campus.zzimkkong.fixture.CampusFixture
 import com.woowahan.campus.zzimkkong.fixture.SettingFixture.Companion.회의실_예약_설정_1
 import com.woowahan.campus.zzimkkong.fixture.SettingFixture.Companion.회의실_예약_설정_3
 import com.woowahan.campus.zzimkkong.fixture.SpaceFixture
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
 import io.restassured.RestAssured
+import openapi.model.SpaceGetAll
+import openapi.model.SpaceGetSingle
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 
@@ -45,53 +40,11 @@ class ReadSpaceTest(
                 .`when`().get("/api/maps/${campus.id}/spaces")
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(SpaceGetAll::class.java)
 
             Then("200 응답과 저장된 회의실 정보들을 반환한다.") {
                 response.statusCode() shouldBe 200
-                response.asPrettyJson() shouldBe
-                    """
-                        {
-                            "spaces": [
-                                {
-                                    "id": ${space.id},
-                                    "name": "${space.name}",
-                                    "color": "${space.color}",
-                                    "area": "${space.area}",
-                                    "reservationEnable": ${space.reservationEnabled},
-                                    "settings": [
-                                        {
-                                            "settingStartTime": "${settings[0].startTime}",
-                                            "settingEndTime": "${settings[0].endTime}",
-                                            "reservationMaximumTimeUnit": ${settings[0].maximumMinute},
-                                            "enabledDayOfWeek": {
-                                                "monday": ${settings[0].enableDays.contains(MONDAY)},
-                                                "tuesday": ${settings[0].enableDays.contains(TUESDAY)},
-                                                "wednesday": ${settings[0].enableDays.contains(WEDNESDAY)},
-                                                "thursday": ${settings[0].enableDays.contains(THURSDAY)},
-                                                "friday": ${settings[0].enableDays.contains(FRIDAY)},
-                                                "saturday": ${settings[0].enableDays.contains(SATURDAY)},
-                                                "sunday": ${settings[0].enableDays.contains(SUNDAY)}
-                                            }
-                                        },
-                                        {
-                                            "settingStartTime": "${settings[1].startTime}",
-                                            "settingEndTime": "${settings[1].endTime}",
-                                            "reservationMaximumTimeUnit": ${settings[1].maximumMinute},
-                                            "enabledDayOfWeek": {
-                                                "monday": ${settings[1].enableDays.contains(MONDAY)},
-                                                "tuesday": ${settings[1].enableDays.contains(TUESDAY)},
-                                                "wednesday": ${settings[1].enableDays.contains(WEDNESDAY)},
-                                                "thursday": ${settings[1].enableDays.contains(THURSDAY)},
-                                                "friday": ${settings[1].enableDays.contains(FRIDAY)},
-                                                "saturday": ${settings[1].enableDays.contains(SATURDAY)},
-                                                "sunday": ${settings[1].enableDays.contains(SUNDAY)}
-                                            }
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    """.trimIndent()
+                responseBody shouldBeEqualToComparingFields SpaceFixture.`복수 회의실 응답`(listOf(space))
             }
         }
 
@@ -101,49 +54,11 @@ class ReadSpaceTest(
                 .`when`().get("/api/maps/${campus.id}/spaces/${space.id}")
                 .then().log().all()
                 .extract()
+            val responseBody = response.`as`(SpaceGetSingle::class.java)
 
             Then("200 응답과 저장된 회의실 정보들을 반환한다.") {
                 response.statusCode() shouldBe 200
-                response.asPrettyJson() shouldBe
-                    """
-                        {
-                            "id": ${space.id},
-                            "name": "${space.name}",
-                            "color": "${space.color}",
-                            "area": "${space.area}",
-                            "reservationEnable": ${space.reservationEnabled},
-                            "settings": [
-                                {
-                                    "settingStartTime": "${settings[0].startTime}",
-                                    "settingEndTime": "${settings[0].endTime}",
-                                    "reservationMaximumTimeUnit": ${settings[0].maximumMinute},
-                                    "enabledDayOfWeek": {
-                                        "monday": ${settings[0].enableDays.contains(MONDAY)},
-                                        "tuesday": ${settings[0].enableDays.contains(TUESDAY)},
-                                        "wednesday": ${settings[0].enableDays.contains(WEDNESDAY)},
-                                        "thursday": ${settings[0].enableDays.contains(THURSDAY)},
-                                        "friday": ${settings[0].enableDays.contains(FRIDAY)},
-                                        "saturday": ${settings[0].enableDays.contains(SATURDAY)},
-                                        "sunday": ${settings[0].enableDays.contains(SUNDAY)}
-                                    }
-                                },
-                                {
-                                    "settingStartTime": "${settings[1].startTime}",
-                                    "settingEndTime": "${settings[1].endTime}",
-                                    "reservationMaximumTimeUnit": ${settings[1].maximumMinute},
-                                    "enabledDayOfWeek": {
-                                        "monday": ${settings[1].enableDays.contains(MONDAY)},
-                                        "tuesday": ${settings[1].enableDays.contains(TUESDAY)},
-                                        "wednesday": ${settings[1].enableDays.contains(WEDNESDAY)},
-                                        "thursday": ${settings[1].enableDays.contains(THURSDAY)},
-                                        "friday": ${settings[1].enableDays.contains(FRIDAY)},
-                                        "saturday": ${settings[1].enableDays.contains(SATURDAY)},
-                                        "sunday": ${settings[1].enableDays.contains(SUNDAY)}
-                                    }
-                                }
-                            ]
-                        }
-                    """.trimIndent()
+                responseBody shouldBeEqualToComparingFields SpaceFixture.`단일 회의실 응답`(space)
             }
         }
     }
