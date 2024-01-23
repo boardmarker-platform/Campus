@@ -18,6 +18,8 @@ tags:
     description: 공지사항 수정
   - name: DeleteAnnouncement
     description: 공지사항 삭제
+  - name: FindMyAttendances
+    description: 내 출결 현황 조회
 paths:
   /api/announcements:
     post:
@@ -213,6 +215,45 @@ paths:
           description: Unauthorized
         400:
           description: Bad Request
+  /api/attendances/me:
+    get:
+      operationId: findMyAttendances
+      tags:
+        - FindMyAttendances
+      summary: 내 출결 현황 조회
+      description: 크루가 자신의 출결 현황을 조회한다
+      parameters:
+        - in: query
+          name: from
+          schema:
+            type: string
+            example: 2023-12-29
+          required: false
+          description: 시작 날짜
+        - in: query
+          name: to
+          schema:
+            type: string
+            example: 2023-12-31
+          required: false
+          description: 끝 날짜
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            example: 'Basic {token}'
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findMyAttendancesResponse'
+        401:
+          description: Unauthorized
+        400:
+          description: Bad Request
 
 components:
   schemas:
@@ -374,3 +415,27 @@ components:
         - title
         - author
         - createdAt
+
+    findMyAttendancesResponse:
+      type: object
+      properties:
+        attendances:
+          type: array
+          items:
+            $ref: '#/components/schemas/attendancesListResponse'
+      required:
+        - attendances
+    attendancesListResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2023-12-29T00:00:00.000'
+          nullable: false
+        status:
+          type: string
+          example: 'attendance'
+          nullable: false
+      required:
+        - date
+        - status
